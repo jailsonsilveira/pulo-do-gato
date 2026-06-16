@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-import { Theme } from "../shared/themes/Theme";
+import { Theme } from "../../../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
-import { TNavigationProps } from "../AppRoutes";
-import { Header } from "../shared/components/Header";
+import { TNavigationProps } from "../../../shared/navigation/AppRoutes";
+import { Header } from "../../../shared/components/Header";
 
 
 export const Home = () => {

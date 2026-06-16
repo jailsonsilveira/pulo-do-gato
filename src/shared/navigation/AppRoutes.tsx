@@ -3,11 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DefaultTheme, NavigationContainer, NavigationProp } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Home } from './pages/Home';
-import { Community } from './pages/Community';
-import { Profile } from './pages/Profile';
-import { HelpJourney } from './pages/HelpJourney';
-import { Theme } from './shared/themes/Theme';
+import { Home } from '../../features/home/screens/HomeScreen';
+import { Community } from '../../features/community/screens/CommunityScreen';
+import { Profile } from '../../features/profile/screens/ProfileScreen';
+import { HelpJourney } from '../../features/help-journey/screens/HelpJourneyScreen';
+import { Theme } from '../themes/Theme';
 
 
 

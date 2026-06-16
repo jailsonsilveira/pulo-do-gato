@@ -1,13 +1,15 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Header } from "../shared/components/Header";
-import { Theme } from "../shared/themes/Theme";
+import { Header } from "../../../shared/components/Header";
+import { Theme } from "../../../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 
-export const Community = () => {
+export const Profile = () => {
     return (
         <View style={styles.mainContainer}>
             <StatusBar style="light" backgroundColor={Theme.colors.primary} />
+            
+            {/* Parte superior: Fundo com a cor primary */}
             <Header />
 
             {/* No meio: fundo branco */}
@@ -16,15 +18,15 @@ export const Community = () => {
                 contentContainerStyle={styles.contentScroll}
                 showsVerticalScrollIndicator={false}
             >
-                <Text style={styles.pageTitle}>Comunidade</Text>
+                <Text style={styles.pageTitle}>Meu Perfil</Text>
                 
                 <View style={styles.emptyCard}>
                     <View style={styles.cardIconCircle}>
-                        <MaterialIcons name="group" size={32} color={Theme.colors.primary} />
+                        <MaterialIcons name="person" size={32} color={Theme.colors.primary} />
                     </View>
-                    <Text style={styles.cardTitle}>Em construção</Text>
+                    <Text style={styles.cardTitle}>Configurações de Perfil</Text>
                     <Text style={styles.cardDescription}>
-                        Em breve você poderá interagir com outros humanos gateiros por aqui.
+                        Aqui você poderá ver seus dados e as configurações de sua conta futuramente.
                     </Text>
                 </View>
             </ScrollView>

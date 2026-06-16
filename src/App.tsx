@@ -2,7 +2,7 @@ import { useFonts } from 'expo-font';
 import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { AppRoutes } from './AppRoutes';
+import { AppRoutes } from './shared/navigation/AppRoutes';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Theme } from './shared/themes/Theme';
 import { StatusBar } from 'expo-status-bar';

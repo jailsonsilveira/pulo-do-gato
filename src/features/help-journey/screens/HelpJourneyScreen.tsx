@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TNavigationProps } from "../AppRoutes";
-import { Theme } from "../shared/themes/Theme";
+import { TNavigationProps } from "../../../shared/navigation/AppRoutes";
+import { Theme } from "../../../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 
@@ -50,7 +50,7 @@ export const HelpJourney = () => {
                 {/* Logo com a cor primary e ao lado o nome Pulo do Gato */}
                 <View style={styles.headerTitleContainer}>
                     <Image 
-                        source={require('../../assets/logo-dark.png')} 
+                        source={require('../../../../assets/logo-dark.png')} 
                         style={styles.logo} 
                         resizeMode="contain"
                     />
