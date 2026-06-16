@@ -69,11 +69,11 @@ export function AppRoutes() {
             fonts: {
                 ...DefaultTheme.fonts,
                 bold: {
-                    fontFamily: Theme.fonts.interBold,
+                    fontFamily: Theme.fonts.poppingsBold,
                     fontWeight: '700'
                 },
                 regular: {
-                    fontFamily: Theme.fonts.interRegular,
+                    fontFamily: Theme.fonts.poppingsRegular,
                     fontWeight: '500'
                 }
             },

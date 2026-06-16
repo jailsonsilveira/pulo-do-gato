@@ -1,5 +1,5 @@
 import { useFonts } from 'expo-font';
-import { Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { AppRoutes } from './AppRoutes';
@@ -13,8 +13,8 @@ SplashScreen.preventAutoHideAsync();
 export function App() {
 
   const [loaded, error] = useFonts({
-      InterRegular: Inter_400Regular,
-      InterBold: Inter_700Bold,
+      PoppinsRegular: Poppins_400Regular,
+      PoppingsBold: Poppins_700Bold,
   });
 
   useEffect(() => {

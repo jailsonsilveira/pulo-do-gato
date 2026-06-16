@@ -1,14 +1,14 @@
 export const Theme = {
     colors: {
-        primary: '#987BCE',
-        secondary: '#FAFAFA',
+        primary: '#CC6699',
+        secondary: '#91CDE5',
         background: '#FFFFFF',
         text: 'white',
         divider: '#373738'
     },
     fonts: {
-        interRegular: 'InterRegular',
-        interBold: 'InterBold'
+        poppingsRegular: 'PoppingsRegular',
+        poppingsBold: 'PoppingsBold'
     },
     fontSizes: {
         title: 32,
