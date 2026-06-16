@@ -28,6 +28,14 @@ function TabRoutes() {
                 tabBarStyle: {
                     backgroundColor: Theme.colors.background,
                     borderTopColor: Theme.colors.divider,
+                    height: 84,
+                    paddingTop: Theme.spacing.sm,
+                    paddingBottom: Theme.spacing.md,
+                },
+                tabBarLabelStyle: {
+                    fontFamily: Theme.fonts.poppingsRegular,
+                    fontSize: Theme.fontSizes.label,
+                    marginTop: Theme.spacing.xs,
                 }
             }}
         >
@@ -35,8 +43,8 @@ function TabRoutes() {
                 name="Inicio"
                 component={Home}
                 options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="home" color={color} size={size} />
+                    tabBarIcon: ({ color }) => (
+                        <MaterialIcons name="home" color={color} size={28} />
                     )
                 }}
             />
@@ -44,8 +52,8 @@ function TabRoutes() {
                 name="Comunidade"
                 component={Community}
                 options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="group" color={color} size={size} />
+                    tabBarIcon: ({ color }) => (
+                        <MaterialIcons name="group" color={color} size={28} />
                     )
                 }}
             />
@@ -53,8 +61,8 @@ function TabRoutes() {
                 name="Perfil"
                 component={Profile}
                 options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="person" color={color} size={size} />
+                    tabBarIcon: ({ color }) => (
+                        <MaterialIcons name="person" color={color} size={28} />
                     )
                 }}
             />
