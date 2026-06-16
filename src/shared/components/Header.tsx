@@ -27,11 +27,7 @@ const styles = StyleSheet.create({
         paddingBottom: Theme.spacing.xl,
         borderBottomLeftRadius: Theme.borderRadius.xxl,
         borderBottomRightRadius: Theme.borderRadius.xxl,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.12,
-        shadowRadius: 8,
-        elevation: 6,
+        ...Theme.shadows.md,
     },
     headerTitleContainer: {
         flexDirection: 'row',
@@ -44,9 +40,6 @@ const styles = StyleSheet.create({
         tintColor: '#FFFFFF',
     },
     headerTitle: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.headerTitle,
-        color: '#FFFFFF',
-        letterSpacing: -0.5,
+        ...Theme.typography.headerTitle,
     },
 });

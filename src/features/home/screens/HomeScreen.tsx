@@ -1,11 +1,11 @@
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Theme } from "../../../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { TNavigationProps } from "../../../shared/navigation/AppRoutes";
 import { Header } from "../../../shared/components/Header";
-
+import { ScreenLayout } from "../../../shared/components/ScreenLayout";
 
 export const Home = () => {
     const navigation = useNavigation<TNavigationProps>();
@@ -17,11 +17,7 @@ export const Home = () => {
             <Header />
 
             {/* No meio: fundo branco */}
-            <ScrollView 
-                style={styles.contentContainer} 
-                contentContainerStyle={styles.contentScroll}
-                showsVerticalScrollIndicator={false}
-            >
+            <ScreenLayout>
                 {/* Primeira linha: O texto Oi, humano */}
                 <Text style={styles.greetingText}>Oi, humano</Text>
 
@@ -45,7 +41,7 @@ export const Home = () => {
                     <MaterialIcons name="healing" size={20} color="#FFFFFF" style={styles.buttonIcon} />
                     <Text style={styles.helpButtonText}>preciso de ajuda</Text>
                 </TouchableOpacity>
-            </ScrollView>
+            </ScreenLayout>
         </View>
     );
 }
@@ -55,21 +51,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Theme.colors.background,
     },
-
-    contentContainer: {
-        flex: 1,
-        backgroundColor: Theme.colors.background,
-    },
-    contentScroll: {
-        paddingHorizontal: Theme.spacing.xxl,
-        paddingTop: Theme.spacing.xxxl,
-        paddingBottom: Theme.spacing.extraHuge,
-        flexGrow: 1,
-    },
     greetingText: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.titleLarge,
-        color: '#1E293B',
+        ...Theme.typography.titleLarge,
         marginBottom: Theme.spacing.xxl,
     },
     emptyCard: {
@@ -101,9 +84,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     cardDescription: {
-        fontFamily: Theme.fonts.poppingsRegular,
-        fontSize: Theme.fontSizes.bodySecondary,
-        color: '#94A3B8',
+        ...Theme.typography.bodySecondary,
         textAlign: 'center',
         lineHeight: 20,
     },
@@ -115,11 +96,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         gap: Theme.spacing.sm,
-        shadowColor: Theme.colors.primary,
-        shadowOffset: { width: 0, height: 6 },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
-        elevation: 6,
+        ...Theme.shadows.primary,
         marginTop: 'auto',
     },
     buttonIcon: {

@@ -328,11 +328,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         gap: Theme.spacing.sm,
-        shadowColor: Theme.colors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6,
-        elevation: 4,
+        ...Theme.shadows.primary,
     },
     continueButtonDisabled: {
         backgroundColor: '#CBD5E1',

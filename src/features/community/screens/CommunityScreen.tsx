@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Header } from "../../../shared/components/Header";
 import { Theme } from "../../../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
+import { ScreenLayout } from "../../../shared/components/ScreenLayout";
 
 export const Community = () => {
     return (
@@ -11,11 +12,7 @@ export const Community = () => {
             <Header />
 
             {/* No meio: fundo branco */}
-            <ScrollView 
-                style={styles.contentContainer} 
-                contentContainerStyle={styles.contentScroll}
-                showsVerticalScrollIndicator={false}
-            >
+            <ScreenLayout>
                 <Text style={styles.pageTitle}>Comunidade</Text>
                 
                 <View style={styles.emptyCard}>
@@ -27,7 +24,7 @@ export const Community = () => {
                         Em breve você poderá interagir com outros humanos gateiros por aqui.
                     </Text>
                 </View>
-            </ScrollView>
+            </ScreenLayout>
         </View>
     );
 }
@@ -37,21 +34,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Theme.colors.background,
     },
-
-    contentContainer: {
-        flex: 1,
-        backgroundColor: Theme.colors.background,
-    },
-    contentScroll: {
-        paddingHorizontal: Theme.spacing.xxl,
-        paddingTop: Theme.spacing.xxxl,
-        paddingBottom: Theme.spacing.extraHuge,
-        flexGrow: 1,
-    },
     pageTitle: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.titleLarge,
-        color: '#1E293B',
+        ...Theme.typography.titleLarge,
         marginBottom: Theme.spacing.xxl,
     },
     emptyCard: {
@@ -82,9 +66,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     cardDescription: {
-        fontFamily: Theme.fonts.poppingsRegular,
-        fontSize: Theme.fontSizes.bodySecondary,
-        color: '#94A3B8',
+        ...Theme.typography.bodySecondary,
         textAlign: 'center',
         lineHeight: 20,
     },
