@@ -1,10 +1,10 @@
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TNavigationProps } from "../AppRoutes";
 import { Theme } from "../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
-import { useEffect, useState, useMemo, useCallback } from "react";
-export const Home = () => {
+
+export const Profile = () => {
     const navigation = useNavigation<TNavigationProps>();
 
     return (
@@ -12,8 +12,7 @@ export const Home = () => {
             <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate("Perfil")}>
                 <MaterialIcons name="settings" size={24} color={Theme.colors.divider} />
             </TouchableOpacity>
-            <Text>Home</Text>
-
+            <Text>Profile</Text>
         </View>
 
     );
