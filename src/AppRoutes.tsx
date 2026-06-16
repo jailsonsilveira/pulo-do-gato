@@ -6,7 +6,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Home } from './pages/Home';
 import { Community } from './pages/Community';
 import { Profile } from './pages/Profile';
+import { HelpJourney } from './pages/HelpJourney';
 import { Theme } from './shared/themes/Theme';
+
 
 
 type TTabDefinitions = {
@@ -15,7 +17,12 @@ type TTabDefinitions = {
     Perfil: undefined;
 }
 
-const Stack = createStackNavigator();
+export type TStackDefinitions = {
+    HomeTab: undefined;
+    HelpJourney: undefined;
+}
+
+const Stack = createStackNavigator<TStackDefinitions>();
 const Tab = createBottomTabNavigator<TTabDefinitions>();
 
 function TabRoutes() {
@@ -95,11 +102,11 @@ export function AppRoutes() {
         }}>
             <Stack.Navigator initialRouteName='HomeTab' screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="HomeTab" component={TabRoutes} />
-                {/* Outras telas como Settings seriam adicionadas aqui */}
+                <Stack.Screen name="HelpJourney" component={HelpJourney} />
             </Stack.Navigator>
         </NavigationContainer>
 
     );
 }
 
-export type TNavigationProps = NavigationProp<TTabDefinitions>;
+export type TNavigationProps = NavigationProp<TStackDefinitions & TTabDefinitions>;

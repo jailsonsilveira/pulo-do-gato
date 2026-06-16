@@ -1,25 +1,20 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Theme } from "../shared/themes/Theme";
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
+import { TNavigationProps } from "../AppRoutes";
+import { Header } from "../shared/components/Header";
+
 
 export const Home = () => {
+    const navigation = useNavigation<TNavigationProps>();
     return (
         <View style={styles.mainContainer}>
             <StatusBar style="light" backgroundColor={Theme.colors.primary} />
             
             {/* Parte superior: Fundo com a cor primary */}
-            <View style={styles.header}>
-                {/* Na linha: logo white e o título Pulo do Gato */}
-                <View style={styles.headerTitleContainer}>
-                    <Image 
-                        source={require('../../assets/logo-dark.png')} 
-                        style={styles.logo} 
-                        resizeMode="contain"
-                    />
-                    <Text style={styles.headerTitle}>Pulo do Gato</Text>
-                </View>
-            </View>
+            <Header />
 
             {/* No meio: fundo branco */}
             <ScrollView 
@@ -42,7 +37,11 @@ export const Home = () => {
                 </View>
 
                 {/* Terceira linha: um botão "preciso de ajuda" */}
-                <TouchableOpacity style={styles.helpButton} activeOpacity={0.9}>
+                <TouchableOpacity 
+                    style={styles.helpButton} 
+                    activeOpacity={0.9}
+                    onPress={() => navigation.navigate("HelpJourney")}
+                >
                     <MaterialIcons name="healing" size={20} color="#FFFFFF" style={styles.buttonIcon} />
                     <Text style={styles.helpButtonText}>preciso de ajuda</Text>
                 </TouchableOpacity>
@@ -56,38 +55,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Theme.colors.background,
     },
-    header: {
-        backgroundColor: Theme.colors.primary,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: Theme.spacing.xxl,
-        paddingTop: Theme.spacing.xxl,
-        paddingBottom: Theme.spacing.xxl,
-        borderBottomLeftRadius: Theme.borderRadius.xxl,
-        borderBottomRightRadius: Theme.borderRadius.xxl,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.12,
-        shadowRadius: 8,
-        elevation: 6,
-    },
-    headerTitleContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: Theme.spacing.md,
-    },
-    logo: {
-        width: 36,
-        height: 36,
-        tintColor: '#FFFFFF',
-    },
-    headerTitle: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.headerTitle,
-        color: '#FFFFFF',
-        letterSpacing: -0.5,
-    },
+
     contentContainer: {
         flex: 1,
         backgroundColor: Theme.colors.background,
