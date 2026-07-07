@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "rea
 import { useNavigation } from "@react-navigation/native";
 import { TNavigationProps } from "../../../shared/navigation/AppRoutes";
 import { Theme } from "../../../shared/themes/Theme";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 
 export const HelpJourney = () => {
@@ -12,11 +12,11 @@ export const HelpJourney = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     const options = [
-        "Está agressivo",
-        "Não usa a caixa de areia",
-        "Adaptação com outro gato",
-        "Está assustado",
-        "Outro"
+        { id: "agressivo", label: "Está agressivo", icon: "cat" },
+        { id: "areia", label: "Não usa a caixa de areia", icon: "paw" },
+        { id: "adaptacao", label: "Adaptação com outro gato", icon: "cards-heart-outline" },
+        { id: "assustado", label: "Está assustado", icon: "emoticon-sad-outline" },
+        { id: "outro", label: "Outro", icon: "dots-horizontal" }
     ];
 
     const handleSelect = (option: string) => {
@@ -60,41 +60,7 @@ export const HelpJourney = () => {
                 <View style={styles.placeholder} />
             </View>
 
-            {/* Middle Step Progress Indicator */}
-            <View style={styles.progressContainer}>
-                <View style={styles.stepWrapper}>
-                    <View style={[
-                        styles.stepCircle, 
-                        step >= 1 ? styles.stepCircleActive : styles.stepCircleInactive
-                    ]}>
-                        {step > 1 ? (
-                            <MaterialIcons name="check" size={18} color="#FFFFFF" />
-                        ) : (
-                            <Text style={styles.stepNumberActive}>1</Text>
-                        )}
-                    </View>
-                    <Text style={[styles.stepLabel, step >= 1 ? styles.stepLabelActive : styles.stepLabelInactive]}>
-                        Sintoma
-                    </Text>
-                </View>
 
-                <View style={[
-                    styles.progressBarLine, 
-                    step >= 2 ? styles.progressBarLineActive : styles.progressBarLineInactive
-                ]} />
-
-                <View style={styles.stepWrapper}>
-                    <View style={[
-                        styles.stepCircle, 
-                        step >= 2 ? styles.stepCircleActive : styles.stepCircleInactive
-                    ]}>
-                        <Text style={step >= 2 ? styles.stepNumberActive : styles.stepNumberInactive}>2</Text>
-                    </View>
-                    <Text style={[styles.stepLabel, step >= 2 ? styles.stepLabelActive : styles.stepLabelInactive]}>
-                        Solução
-                    </Text>
-                </View>
-            </View>
 
             {/* Conteúdo da tela */}
             {step === 1 ? (
@@ -104,28 +70,32 @@ export const HelpJourney = () => {
                         
                         <View style={styles.optionsContainer}>
                             {options.map((option) => {
-                                const isSelected = selectedOption === option;
+                                const isSelected = selectedOption === option.id;
                                 return (
                                     <TouchableOpacity
-                                        key={option}
+                                        key={option.id}
                                         style={[
                                             styles.optionCard,
                                             isSelected && styles.optionCardSelected
                                         ]}
-                                        onPress={() => handleSelect(option)}
+                                        onPress={() => handleSelect(option.id)}
                                         activeOpacity={0.7}
                                     >
                                         <View style={[
-                                            styles.radioOuter,
-                                            isSelected && styles.radioOuterSelected
+                                            styles.iconContainer,
+                                            isSelected && styles.iconContainerSelected
                                         ]}>
-                                            {isSelected && <View style={styles.radioInner} />}
+                                            <MaterialCommunityIcons 
+                                                name={option.icon as any} 
+                                                size={24} 
+                                                color={isSelected ? '#FFFFFF' : Theme.colors.primary} 
+                                            />
                                         </View>
                                         <Text style={[
                                             styles.optionText,
                                             isSelected && styles.optionTextSelected
                                         ]}>
-                                            {option}
+                                            {option.label}
                                         </Text>
                                     </TouchableOpacity>
                                 );
@@ -195,65 +165,7 @@ const styles = StyleSheet.create({
     placeholder: {
         width: 32,
     },
-    progressContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: Theme.spacing.lg,
-        backgroundColor: '#F8FAFC',
-        borderBottomWidth: 1,
-        borderBottomColor: '#F1F5F9',
-    },
-    stepWrapper: {
-        alignItems: 'center',
-        gap: Theme.spacing.xs,
-    },
-    stepCircle: {
-        width: 28,
-        height: 28,
-        borderRadius: 14,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    stepCircleActive: {
-        backgroundColor: Theme.colors.primary,
-    },
-    stepCircleInactive: {
-        backgroundColor: '#E2E8F0',
-    },
-    stepNumberActive: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.body,
-        color: '#FFFFFF',
-    },
-    stepNumberInactive: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.body,
-        color: '#94A3B8',
-    },
-    stepLabel: {
-        fontFamily: Theme.fonts.poppingsRegular,
-        fontSize: Theme.fontSizes.label,
-    },
-    stepLabelActive: {
-        color: Theme.colors.primary,
-        fontFamily: Theme.fonts.poppingsBold,
-    },
-    stepLabelInactive: {
-        color: '#94A3B8',
-    },
-    progressBarLine: {
-        width: 60,
-        height: 3,
-        marginHorizontal: Theme.spacing.sm,
-        marginTop: -16,
-    },
-    progressBarLineActive: {
-        backgroundColor: Theme.colors.primary,
-    },
-    progressBarLineInactive: {
-        backgroundColor: '#E2E8F0',
-    },
+
     content: {
         flex: 1,
         backgroundColor: '#FFFFFF',
@@ -286,22 +198,15 @@ const styles = StyleSheet.create({
         borderColor: Theme.colors.primary,
         backgroundColor: 'rgba(204, 102, 153, 0.04)',
     },
-    radioOuter: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#94A3B8',
+    iconContainer: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: 'rgba(204, 102, 153, 0.1)',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    radioOuterSelected: {
-        borderColor: Theme.colors.primary,
-    },
-    radioInner: {
-        width: 10,
-        height: 10,
-        borderRadius: 5,
+    iconContainerSelected: {
         backgroundColor: Theme.colors.primary,
     },
     optionText: {
