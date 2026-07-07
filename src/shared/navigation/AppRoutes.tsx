@@ -35,9 +35,9 @@ function TabRoutes() {
                 tabBarStyle: {
                     backgroundColor: Theme.colors.background,
                     borderTopColor: Theme.colors.divider,
-                    height: 84,
+                    height: 72,
                     paddingTop: Theme.spacing.sm,
-                    paddingBottom: Theme.spacing.md,
+                    paddingBottom: Theme.spacing.sm,
                 },
                 tabBarLabelStyle: {
                     fontFamily: Theme.fonts.poppingsRegular,
@@ -51,7 +51,7 @@ function TabRoutes() {
                 component={Home}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons name="home" color={color} size={28} />
+                        <MaterialIcons name="home" color={color} size={24} />
                     )
                 }}
             />
@@ -60,7 +60,7 @@ function TabRoutes() {
                 component={Community}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons name="group" color={color} size={28} />
+                        <MaterialIcons name="group" color={color} size={24} />
                     )
                 }}
             />
@@ -69,7 +69,7 @@ function TabRoutes() {
                 component={Profile}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons name="person" color={color} size={28} />
+                        <MaterialIcons name="person" color={color} size={24} />
                     )
                 }}
             />

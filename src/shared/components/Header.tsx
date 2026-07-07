@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         gap: Theme.spacing.md,
     },
     logo: {
-        width: 36,
-        height: 36,
+        width: 28,
+        height: 28,
         tintColor: '#FFFFFF',
     },
     headerTitle: {

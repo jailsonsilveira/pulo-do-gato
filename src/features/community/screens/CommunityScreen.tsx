@@ -17,7 +17,7 @@ export const Community = () => {
                 
                 <View style={styles.emptyCard}>
                     <View style={styles.cardIconCircle}>
-                        <MaterialIcons name="group" size={32} color={Theme.colors.primary} />
+                        <MaterialIcons name="group" size={24} color={Theme.colors.primary} />
                     </View>
                     <Text style={styles.cardTitle}>Em construção</Text>
                     <Text style={styles.cardDescription}>
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: '#E2E8F0',
         borderStyle: 'dashed',
-        minHeight: 180,
+        minHeight: 140,
     },
     cardIconCircle: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: 48,
+        height: 48,
+        borderRadius: 24,
         backgroundColor: 'rgba(204, 102, 153, 0.1)',
         justifyContent: 'center',
         alignItems: 'center',

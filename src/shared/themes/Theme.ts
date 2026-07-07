@@ -11,13 +11,13 @@ export const Theme = {
         poppingsBold: 'PoppingsBold'
     },
     fontSizes: {
-        title: 32,
-        titleLarge: 28,
-        title2: 20,
-        headerTitle: 22,
-        body: 16,
-        bodySecondary: 14,
-        label: 12,
+        title: 24,
+        titleLarge: 22,
+        title2: 18,
+        headerTitle: 18,
+        body: 14,
+        bodySecondary: 12,
+        label: 10,
     },
     spacing: {
         xs: 4,
@@ -25,10 +25,10 @@ export const Theme = {
         md: 12,
         lg: 16,
         xl: 20,
-        xxl: 24,
-        xxxl: 28,
-        huge: 32,
-        extraHuge: 36,
+        xxl: 20,
+        xxxl: 24,
+        huge: 24,
+        extraHuge: 28,
     },
     borderRadius: {
         sm: 8,
@@ -64,38 +64,38 @@ export const Theme = {
     typography: {
         title: {
             fontFamily: 'PoppingsBold',
-            fontSize: 32,
+            fontSize: 24,
             color: '#1E293B',
         },
         titleLarge: {
             fontFamily: 'PoppingsBold',
-            fontSize: 28,
+            fontSize: 22,
             color: '#1E293B',
         },
         title2: {
             fontFamily: 'PoppingsBold',
-            fontSize: 20,
+            fontSize: 18,
             color: '#1E293B',
         },
         headerTitle: {
             fontFamily: 'PoppingsBold',
-            fontSize: 22,
+            fontSize: 18,
             color: '#FFFFFF',
             letterSpacing: -0.5,
         },
         body: {
             fontFamily: 'PoppinsRegular',
-            fontSize: 16,
+            fontSize: 14,
             color: '#475569',
         },
         bodySecondary: {
             fontFamily: 'PoppinsRegular',
-            fontSize: 14,
+            fontSize: 12,
             color: '#94A3B8',
         },
         label: {
             fontFamily: 'PoppinsRegular',
-            fontSize: 12,
+            fontSize: 10,
             color: '#94A3B8',
         }
     }

@@ -183,8 +183,8 @@ const styles = StyleSheet.create({
         gap: Theme.spacing.sm,
     },
     logo: {
-        width: 32,
-        height: 32,
+        width: 28,
+        height: 28,
         tintColor: Theme.colors.primary,
     },
     headerTitle: {
@@ -209,9 +209,9 @@ const styles = StyleSheet.create({
         gap: Theme.spacing.xs,
     },
     stepCircle: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
+        width: 28,
+        height: 28,
+        borderRadius: 14,
         justifyContent: 'center',
         alignItems: 'center',
     },
