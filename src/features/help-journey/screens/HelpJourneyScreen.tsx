@@ -242,7 +242,14 @@ export const HelpJourney = () => {
                         <Text style={styles.questionText}>Vamos entender melhor seu gato</Text>
 
                         {/* Como ele é? */}
-                        <Text style={styles.sectionTitle}>Como ele é?</Text>
+                        <View style={styles.sectionTitleRow}>
+                            <Text style={styles.sectionTitle}>Como ele é?</Text>
+                            <Image 
+                                source={require('../../../../assets/CuteCat.png')} 
+                                style={styles.cuteCatImage}
+                                resizeMode="contain"
+                            />
+                        </View>
                         <View style={styles.rowOptionsContainer}>
                             {['Assustado', 'Neutro', 'Explorador'].map((opt) => (
                                 <TouchableOpacity 
@@ -464,12 +471,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8FAFC',
         minHeight: 120,
     },
+    sectionTitleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: Theme.spacing.sm,
+        marginTop: Theme.spacing.lg,
+    },
+    cuteCatImage: {
+        width: 48,
+        height: 48,
+    },
     sectionTitle: {
         fontFamily: Theme.fonts.poppingsBold,
         fontSize: Theme.fontSizes.body,
         color: '#475569',
-        marginBottom: Theme.spacing.sm,
-        marginTop: Theme.spacing.lg,
     },
     rowOptionsContainer: {
         flexDirection: 'row',
