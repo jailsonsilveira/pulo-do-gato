@@ -1,5 +1,7 @@
 import { useFonts } from 'expo-font';
 import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { AppRoutes } from './shared/navigation/AppRoutes';
@@ -15,6 +17,8 @@ export function App() {
   const [loaded, error] = useFonts({
       PoppinsRegular: Poppins_400Regular,
       PoppingsBold: Poppins_700Bold,
+      ...MaterialIcons.font,
+      ...MaterialCommunityIcons.font,
   });
 
   useEffect(() => {
