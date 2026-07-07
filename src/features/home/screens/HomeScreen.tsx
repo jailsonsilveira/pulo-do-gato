@@ -99,6 +99,24 @@ export const Home = () => {
                         </View>
                     </View>
 
+                    {/* Atalho Comunidade */}
+                    <TouchableOpacity
+                        style={styles.communityCard}
+                        activeOpacity={0.85}
+                        onPress={() => navigation.navigate("Comunidade")}
+                    >
+                        <View style={styles.communityCardLeft}>
+                            <View style={styles.communityIconWrap}>
+                                <MaterialIcons name="group" size={24} color={Theme.colors.secondary} />
+                            </View>
+                            <View>
+                                <Text style={styles.communityCardTitle}>Comunidade</Text>
+                                <Text style={styles.communityCardSub}>Ver o que outros gateiros estão vivendo</Text>
+                            </View>
+                        </View>
+                        <MaterialIcons name="arrow-forward-ios" size={14} color="#94A3B8" />
+                    </TouchableOpacity>
+
                     {/* Botão preciso de ajuda */}
                     <TouchableOpacity
                         style={styles.helpButton}
@@ -205,6 +223,45 @@ const styles = StyleSheet.create({
         fontFamily: Theme.fonts.poppingsRegular,
         fontSize: Theme.fontSizes.label,
         color: '#94A3B8',
+    },
+
+    // Community card
+    communityCard: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#FFFFFF',
+        borderRadius: Theme.borderRadius.lg,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+        padding: Theme.spacing.md,
+        marginBottom: Theme.spacing.xl,
+        ...Theme.shadows.sm,
+    },
+    communityCardLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: Theme.spacing.md,
+        flex: 1,
+    },
+    communityIconWrap: {
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+        backgroundColor: 'rgba(145, 205, 229, 0.15)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    communityCardTitle: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.body,
+        color: '#1E293B',
+    },
+    communityCardSub: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.label,
+        color: '#94A3B8',
+        marginTop: 2,
     },
 
     // Help button
