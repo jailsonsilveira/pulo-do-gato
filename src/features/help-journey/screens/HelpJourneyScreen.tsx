@@ -78,7 +78,9 @@ export const HelpJourney = () => {
     };
 
     const handleBack = () => {
-        if (step === 3) {
+        if (step === 4) {
+            setStep(3);
+        } else if (step === 3) {
             setStep(2);
         } else if (step === 2) {
             setStep(1);
@@ -327,13 +329,59 @@ export const HelpJourney = () => {
                                 (!catPersonality || !catEnergy || !catSocial || !catHistory) && styles.continueButtonDisabled
                             ]}
                             disabled={!catPersonality || !catEnergy || !catSocial || !catHistory}
-                            onPress={() => { /* finalizar jornada */ }}
+                            onPress={() => setStep(4)}
                             activeOpacity={0.8}
                         >
-                            <Text style={styles.continueButtonText}>finalizar</Text>
-                            <MaterialIcons name="check" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+                            <Text style={styles.continueButtonText}>continuar</Text>
+                            <MaterialIcons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
                         </TouchableOpacity>
                     </View>
+                </View>
+            ) : step === 4 ? (
+                <View style={styles.content}>
+                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.summaryScrollContent}>
+                        {/* Imagem de finalização */}
+                        <Image
+                            source={require('../../../../assets/CuteCatFinish.png')}
+                            style={styles.finishImage}
+                            resizeMode="contain"
+                        />
+
+                        <Text style={styles.summaryHeading}>Agora este é o que você pode fazer agora:</Text>
+
+                        {/* Passos numerados */}
+                        {[
+                            'Evite contato direto entre os gatos por enquanto',
+                            'Aumente os pontos de fuga e lugares altos',
+                            'Faça associação positiva com comida e presença',
+                        ].map((tip, index) => (
+                            <View key={index} style={styles.tipRow}>
+                                <View style={styles.tipCircle}>
+                                    <Text style={styles.tipNumber}>{index + 1}</Text>
+                                </View>
+                                <Text style={styles.tipText}>{tip}</Text>
+                            </View>
+                        ))}
+
+                        {/* Card de mensagem */}
+                        <View style={styles.messageCard}>
+                            <MaterialCommunityIcons name="heart-outline" size={20} color={Theme.colors.primary} style={{ marginBottom: Theme.spacing.sm }} />
+                            <Text style={styles.messageCardText}>
+                                Cada gato tem seu tempo. Pequenos passos constroem conexão
+                            </Text>
+                        </View>
+
+                        {/* Dois botões de ação */}
+                        <TouchableOpacity style={styles.actionButtonOutline} activeOpacity={0.8}>
+                            <MaterialCommunityIcons name="account-group-outline" size={20} color={Theme.colors.primary} />
+                            <Text style={styles.actionButtonOutlineText}>Ver pessoas passando por isso</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.actionButtonFilled} activeOpacity={0.8}>
+                            <MaterialCommunityIcons name="lifebuoy" size={20} color="#FFFFFF" />
+                            <Text style={styles.actionButtonFilledText}>Quero ajuda mais profunda</Text>
+                        </TouchableOpacity>
+                    </ScrollView>
                 </View>
             ) : null}
         </View>
@@ -559,5 +607,102 @@ const styles = StyleSheet.create({
     dropdownItemTextSelected: {
         fontFamily: Theme.fonts.poppingsBold,
         color: Theme.colors.primary,
+    },
+    summaryScrollContent: {
+        paddingHorizontal: Theme.spacing.xxl,
+        paddingTop: Theme.spacing.xl,
+        paddingBottom: Theme.spacing.huge,
+        alignItems: 'center',
+    },
+    finishImage: {
+        width: 200,
+        height: 200,
+        marginBottom: Theme.spacing.xl,
+    },
+    summaryHeading: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.body,
+        color: '#1E293B',
+        textAlign: 'center',
+        marginBottom: Theme.spacing.xl,
+    },
+    tipRow: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        gap: Theme.spacing.md,
+        marginBottom: Theme.spacing.md,
+        width: '100%',
+    },
+    tipCircle: {
+        width: 28,
+        height: 28,
+        borderRadius: 14,
+        backgroundColor: Theme.colors.primary,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: 0,
+    },
+    tipNumber: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.bodySecondary,
+        color: '#FFFFFF',
+    },
+    tipText: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+        flex: 1,
+        lineHeight: 20,
+    },
+    messageCard: {
+        backgroundColor: 'rgba(204, 102, 153, 0.06)',
+        borderRadius: Theme.borderRadius.lg,
+        borderWidth: 1,
+        borderColor: 'rgba(204, 102, 153, 0.2)',
+        padding: Theme.spacing.lg,
+        alignItems: 'center',
+        marginTop: Theme.spacing.xl,
+        marginBottom: Theme.spacing.xl,
+        width: '100%',
+    },
+    messageCardText: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+        textAlign: 'center',
+        lineHeight: 20,
+        fontStyle: 'italic',
+    },
+    actionButtonOutline: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: Theme.spacing.sm,
+        width: '100%',
+        paddingVertical: Theme.spacing.md,
+        borderRadius: Theme.borderRadius.md,
+        borderWidth: 1.5,
+        borderColor: Theme.colors.primary,
+        marginBottom: Theme.spacing.md,
+    },
+    actionButtonOutlineText: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.body,
+        color: Theme.colors.primary,
+    },
+    actionButtonFilled: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: Theme.spacing.sm,
+        width: '100%',
+        paddingVertical: Theme.spacing.md,
+        borderRadius: Theme.borderRadius.md,
+        backgroundColor: Theme.colors.primary,
+    },
+    actionButtonFilledText: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.body,
+        color: '#FFFFFF',
     },
 });
