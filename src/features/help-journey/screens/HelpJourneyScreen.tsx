@@ -13,6 +13,12 @@ export const HelpJourney = () => {
     const [selectedSubOptions, setSelectedSubOptions] = useState<string[]>([]);
     const [customReason, setCustomReason] = useState("");
 
+    const [catPersonality, setCatPersonality] = useState<string | null>(null);
+    const [catEnergy, setCatEnergy] = useState<string | null>(null);
+    const [catSocial, setCatSocial] = useState<string | null>(null);
+    const [catHistory, setCatHistory] = useState<string | null>(null);
+    const [isHistoryDropdownOpen, setIsHistoryDropdownOpen] = useState(false);
+
     const options = [
         { id: "agressivo", label: "Está agressivo", icon: "cat" },
         { id: "areia", label: "Não usa a caixa de areia", icon: "paw" },
@@ -63,11 +69,18 @@ export const HelpJourney = () => {
     const handleContinue = () => {
         if (step === 1 && selectedOption) {
             setStep(2);
+        } else if (step === 2) {
+            const isStep2Valid = selectedOption === 'outro' ? customReason.trim().length > 0 : selectedSubOptions.length > 0;
+            if (isStep2Valid) {
+                setStep(3);
+            }
         }
     };
 
     const handleBack = () => {
-        if (step === 2) {
+        if (step === 3) {
+            setStep(2);
+        } else if (step === 2) {
             setStep(1);
         } else {
             navigation.goBack();
@@ -156,7 +169,7 @@ export const HelpJourney = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            ) : (
+            ) : step === 2 ? (
                 <View style={styles.content}>
                     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
                         {selectedOption === 'outro' ? (
@@ -215,6 +228,98 @@ export const HelpJourney = () => {
                                 (selectedOption === 'outro' ? !customReason.trim() : selectedSubOptions.length === 0) && styles.continueButtonDisabled
                             ]}
                             disabled={selectedOption === 'outro' ? !customReason.trim() : selectedSubOptions.length === 0}
+                            onPress={handleContinue}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.continueButtonText}>continuar</Text>
+                            <MaterialIcons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            ) : step === 3 ? (
+                <View style={styles.content}>
+                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+                        <Text style={styles.questionText}>Vamos entender melhor seu gato</Text>
+
+                        {/* Como ele é? */}
+                        <Text style={styles.sectionTitle}>Como ele é?</Text>
+                        <View style={styles.rowOptionsContainer}>
+                            {['Assustado', 'Neutro', 'Explorador'].map((opt) => (
+                                <TouchableOpacity 
+                                    key={opt}
+                                    style={[styles.rowOption, catPersonality === opt && styles.rowOptionSelected]}
+                                    onPress={() => setCatPersonality(opt)}
+                                >
+                                    <Text style={[styles.rowOptionText, catPersonality === opt && styles.rowOptionTextSelected]}>{opt}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        {/* Nível de energia */}
+                        <Text style={styles.sectionTitle}>Nível de energia</Text>
+                        <View style={styles.rowOptionsContainer}>
+                            {['Baixo', 'Médio', 'Alto'].map((opt) => (
+                                <TouchableOpacity 
+                                    key={opt}
+                                    style={[styles.rowOption, catEnergy === opt && styles.rowOptionSelected]}
+                                    onPress={() => setCatEnergy(opt)}
+                                >
+                                    <Text style={[styles.rowOptionText, catEnergy === opt && styles.rowOptionTextSelected]}>{opt}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        {/* Convive com outros gatos? */}
+                        <Text style={styles.sectionTitle}>Convive com outros gatos?</Text>
+                        <View style={styles.rowOptionsContainer}>
+                            {['Não', 'Em adaptação', 'Sim'].map((opt) => (
+                                <TouchableOpacity 
+                                    key={opt}
+                                    style={[styles.rowOption, catSocial === opt && styles.rowOptionSelected]}
+                                    onPress={() => setCatSocial(opt)}
+                                >
+                                    <Text style={[styles.rowOptionText, catSocial === opt && styles.rowOptionTextSelected]}>{opt}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        {/* Histórico */}
+                        <Text style={styles.sectionTitle}>Histórico</Text>
+                        <TouchableOpacity 
+                            style={styles.dropdownHeader}
+                            onPress={() => setIsHistoryDropdownOpen(!isHistoryDropdownOpen)}
+                            activeOpacity={0.7}
+                        >
+                            <Text style={styles.dropdownHeaderText}>{catHistory || 'Selecione uma opção'}</Text>
+                            <MaterialIcons name={isHistoryDropdownOpen ? "keyboard-arrow-up" : "keyboard-arrow-down"} size={24} color="#94A3B8" />
+                        </TouchableOpacity>
+                        
+                        {isHistoryDropdownOpen && (
+                            <View style={styles.dropdownList}>
+                                {['Resgatado', 'Resgatado / Abandono', 'Arredio'].map((opt) => (
+                                    <TouchableOpacity 
+                                        key={opt}
+                                        style={styles.dropdownItem}
+                                        onPress={() => {
+                                            setCatHistory(opt);
+                                            setIsHistoryDropdownOpen(false);
+                                        }}
+                                    >
+                                        <Text style={[styles.dropdownItemText, catHistory === opt && styles.dropdownItemTextSelected]}>{opt}</Text>
+                                        {catHistory === opt && <MaterialIcons name="check" size={20} color={Theme.colors.primary} />}
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        )}
+                    </ScrollView>
+
+                    <View style={styles.footer}>
+                        <TouchableOpacity
+                            style={[
+                                styles.continueButton,
+                                (!catPersonality || !catEnergy || !catSocial || !catHistory) && styles.continueButtonDisabled
+                            ]}
+                            disabled={!catPersonality || !catEnergy || !catSocial || !catHistory}
                             onPress={() => { /* finalizar jornada */ }}
                             activeOpacity={0.8}
                         >
@@ -223,7 +328,7 @@ export const HelpJourney = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            )}
+            ) : null}
         </View>
     );
 };
@@ -358,5 +463,85 @@ const styles = StyleSheet.create({
         color: '#475569',
         backgroundColor: '#F8FAFC',
         minHeight: 120,
+    },
+    sectionTitle: {
+        fontFamily: Theme.fonts.poppingsBold,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+        marginBottom: Theme.spacing.sm,
+        marginTop: Theme.spacing.lg,
+    },
+    rowOptionsContainer: {
+        flexDirection: 'row',
+        gap: Theme.spacing.sm,
+        flexWrap: 'wrap',
+    },
+    rowOption: {
+        flex: 1,
+        minWidth: 80,
+        paddingVertical: Theme.spacing.md,
+        paddingHorizontal: Theme.spacing.sm,
+        borderRadius: Theme.borderRadius.md,
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    rowOptionSelected: {
+        borderColor: Theme.colors.primary,
+        backgroundColor: 'rgba(204, 102, 153, 0.04)',
+    },
+    rowOptionText: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.bodySecondary,
+        color: '#475569',
+        textAlign: 'center',
+    },
+    rowOptionTextSelected: {
+        fontFamily: Theme.fonts.poppingsBold,
+        color: '#1E293B',
+    },
+    dropdownHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: Theme.spacing.md,
+        borderRadius: Theme.borderRadius.md,
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        backgroundColor: '#FFFFFF',
+        marginBottom: Theme.spacing.xl,
+    },
+    dropdownHeaderText: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+    },
+    dropdownList: {
+        marginTop: -16,
+        marginBottom: Theme.spacing.xl,
+        borderRadius: Theme.borderRadius.md,
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        backgroundColor: '#FFFFFF',
+        overflow: 'hidden',
+    },
+    dropdownItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: Theme.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: '#F1F5F9',
+    },
+    dropdownItemText: {
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+    },
+    dropdownItemTextSelected: {
+        fontFamily: Theme.fonts.poppingsBold,
+        color: Theme.colors.primary,
     },
 });
