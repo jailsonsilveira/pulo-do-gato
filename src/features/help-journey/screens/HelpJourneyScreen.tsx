@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TNavigationProps } from "../../../shared/navigation/AppRoutes";
 import { Theme } from "../../../shared/themes/Theme";
@@ -10,6 +10,8 @@ export const HelpJourney = () => {
     const navigation = useNavigation<TNavigationProps>();
     const [step, setStep] = useState(1);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [selectedSubOptions, setSelectedSubOptions] = useState<string[]>([]);
+    const [customReason, setCustomReason] = useState("");
 
     const options = [
         { id: "agressivo", label: "Está agressivo", icon: "cat" },
@@ -19,8 +21,43 @@ export const HelpJourney = () => {
         { id: "outro", label: "Outro", icon: "dots-horizontal" }
     ];
 
+    const subOptionsMap: Record<string, string[]> = {
+        'agressivo': [
+            'Rosna',
+            'Se esconde',
+            'Bate no outro gato',
+            'Outro'
+        ],
+        'areia': [
+            'Faz apenas o xixi na caixa',
+            'Joga muita areia para fora',
+            'Demora muito tempo para usar',
+            'Outro'
+        ],
+        'adaptacao': [
+            'Brigas em excesso',
+            'Agressões físicas',
+            'Comportamento de medo',
+            'Intimidação',
+            'Outro'
+        ],
+        'assustado': [
+            'Não come',
+            'Não brinca',
+            'Não bebe água'
+        ]
+    };
+
     const handleSelect = (option: string) => {
         setSelectedOption(option);
+    };
+
+    const toggleSubOption = (option: string) => {
+        setSelectedSubOptions(prev => 
+            prev.includes(option) 
+                ? prev.filter(o => o !== option)
+                : [...prev, option]
+        );
     };
 
     const handleContinue = () => {
@@ -120,8 +157,71 @@ export const HelpJourney = () => {
                     </View>
                 </View>
             ) : (
-                <View style={styles.contentStep2}>
-                    <Text style={styles.step2Text}>continua</Text>
+                <View style={styles.content}>
+                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+                        {selectedOption === 'outro' ? (
+                            <>
+                                <Text style={styles.questionText}>Descreva em detalhes sua necessidade:</Text>
+                                <TextInput
+                                    style={styles.textInput}
+                                    multiline
+                                    numberOfLines={4}
+                                    placeholder="Digite aqui..."
+                                    value={customReason}
+                                    onChangeText={setCustomReason}
+                                    textAlignVertical="top"
+                                    placeholderTextColor="#94A3B8"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.questionText}>Selecione as opções que se aplicam:</Text>
+                                <View style={styles.optionsContainer}>
+                                    {(selectedOption ? subOptionsMap[selectedOption] : [])?.map((option) => {
+                                        const isSelected = selectedSubOptions.includes(option);
+                                        return (
+                                            <TouchableOpacity
+                                                key={option}
+                                                style={[
+                                                    styles.optionCard,
+                                                    isSelected && styles.optionCardSelected
+                                                ]}
+                                                onPress={() => toggleSubOption(option)}
+                                                activeOpacity={0.7}
+                                            >
+                                                <MaterialCommunityIcons 
+                                                    name={isSelected ? "checkbox-marked" : "checkbox-blank-outline"} 
+                                                    size={24} 
+                                                    color={isSelected ? Theme.colors.primary : '#94A3B8'} 
+                                                />
+                                                <Text style={[
+                                                    styles.optionText,
+                                                    isSelected && styles.optionTextSelected
+                                                ]}>
+                                                    {option}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </View>
+                            </>
+                        )}
+                    </ScrollView>
+
+                    <View style={styles.footer}>
+                        <TouchableOpacity
+                            style={[
+                                styles.continueButton,
+                                (selectedOption === 'outro' ? !customReason.trim() : selectedSubOptions.length === 0) && styles.continueButtonDisabled
+                            ]}
+                            disabled={selectedOption === 'outro' ? !customReason.trim() : selectedSubOptions.length === 0}
+                            onPress={() => { /* finalizar jornada */ }}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.continueButtonText}>finalizar</Text>
+                            <MaterialIcons name="check" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )}
         </View>
@@ -248,16 +348,15 @@ const styles = StyleSheet.create({
     buttonIcon: {
         marginLeft: Theme.spacing.xs,
     },
-    contentStep2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-        paddingHorizontal: Theme.spacing.xxl,
-    },
-    step2Text: {
-        fontFamily: Theme.fonts.poppingsBold,
-        fontSize: Theme.fontSizes.title,
-        color: '#1E293B',
+    textInput: {
+        borderWidth: 1.5,
+        borderColor: '#E2E8F0',
+        borderRadius: Theme.borderRadius.md,
+        padding: Theme.spacing.lg,
+        fontFamily: Theme.fonts.poppingsRegular,
+        fontSize: Theme.fontSizes.body,
+        color: '#475569',
+        backgroundColor: '#F8FAFC',
+        minHeight: 120,
     },
 });
